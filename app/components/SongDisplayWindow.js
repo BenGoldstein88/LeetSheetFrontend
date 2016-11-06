@@ -23,21 +23,41 @@ export default class SongDisplayWindow extends React.Component {
 		var that = this
 		e.preventDefault();
 
-		Axios.get('http://localhost:3000/song/')
+		Axios.get('http://localhost:3000/songs/')
 			.then(function(response) {
 				console.log("We got: ", response)
 				that.setState({
 					songs: response.data.songs
 				})
-				console.log("State", that.state)
+				console.log("State: ", that.state)
+			})
+			.catch(function(error) {
+				console.log("Error: ", error)
 			})
 	}
 
 	handleNewSongSubmit(e) {
 		e.preventDefault();
-		console.log('State', this.state)
-		var data = {
-		}
+		var data = this.state.newSongFormData
+		// Axios.post('http://localhost:3000/songs/', data)
+		// 	.then(function(response) {
+		// 		console.log("Response: ", response)
+		// 	})
+		// 	.catch(function(error) {
+		// 		console.log("Error: ", error)
+		// 	})
+
+		Axios({
+			method: "POST",
+			url: "http://localhost:3000/songs/",
+			data: data
+		})
+			.then(function(response) {
+				console.log("Response: ", response)
+			})
+			.catch(function(error) {
+				console.log("Error: ", error)
+			})
 	}
 
 
