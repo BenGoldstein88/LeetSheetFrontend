@@ -1,7 +1,9 @@
 import React from 'react';
 import SongHelpers from '../utils/SongHelpers';
 import Axios from 'axios';
-import NewSongForm from './NewSongForm'
+import NewSongForm from './NewSongForm';
+import SongList from './SongList';
+
 export default class SongDisplayWindow extends React.Component {
 
 	constructor(props) {
@@ -17,6 +19,7 @@ export default class SongDisplayWindow extends React.Component {
 
 		this.getSongs = this.getSongs.bind(this)
 		this.handleNewSongSubmit = this.handleNewSongSubmit.bind(this)
+		this.updateSongList = this.updateSongList.bind(this)
 	}
 
 	getSongs(e) {
@@ -36,9 +39,25 @@ export default class SongDisplayWindow extends React.Component {
 			})
 	}
 
+	updateSongList() {
+		var that = this
+		Axios.get('http://localhost:3000/songs/')
+			.then(function(response) {
+				console.log("We got: ", response)
+				that.setState({
+					songs: response.data.songs
+				})
+				console.log("State: ", that.state)
+			})
+			.catch(function(error) {
+				console.log("Error: ", error)
+			})		
+	}
+
 	handleNewSongSubmit(e) {
 		e.preventDefault();
 		var data = this.state.newSongFormData
+		var that = this
 		// Axios.post('http://localhost:3000/songs/', data)
 		// 	.then(function(response) {
 		// 		console.log("Response: ", response)
@@ -54,6 +73,7 @@ export default class SongDisplayWindow extends React.Component {
 		})
 			.then(function(response) {
 				console.log("Response: ", response)
+				that.updateSongList()
 			})
 			.catch(function(error) {
 				console.log("Error: ", error)
@@ -71,6 +91,7 @@ export default class SongDisplayWindow extends React.Component {
       			Get Songs
       		</button>	
       	</form>
+      	<SongList songs={this.state.songs} />
 
       	<NewSongForm onNewSongSubmit={this.handleNewSongSubmit} newSongFormData={this.state.newSongFormData}/>
 
