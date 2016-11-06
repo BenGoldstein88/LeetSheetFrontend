@@ -1,9 +1,8 @@
 {
   "name": "leetsheetfrontend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-    "dependencies": {
+  "dependencies": {
     "axios": "^0.14.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
@@ -47,5 +46,6 @@
   "bugs": {
     "url": "https://github.com/BenGoldstein88/leetsheetfrontend/issues"
   },
-  "homepage": "https://github.com/BenGoldstein88/leetsheetfrontend#readme"
+  "homepage": "https://github.com/BenGoldstein88/leetsheetfrontend#readme",
+  "description": ""
 }
