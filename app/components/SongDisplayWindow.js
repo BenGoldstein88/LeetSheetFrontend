@@ -91,7 +91,7 @@ export default class SongDisplayWindow extends React.Component {
       			Get Songs
       		</button>	
       	</form>
-      	<SongList songs={this.state.songs} />
+      	<SongList onSongIconClick={this.props.onSongIconClick} songs={this.state.songs} />
 
       	<NewSongForm onNewSongSubmit={this.handleNewSongSubmit} newSongFormData={this.state.newSongFormData}/>
 
