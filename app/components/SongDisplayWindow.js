@@ -28,11 +28,9 @@ export default class SongDisplayWindow extends React.Component {
 
 		Axios.get('http://localhost:3000/songs/')
 			.then(function(response) {
-				console.log("We got: ", response)
 				that.setState({
 					songs: response.data.songs
 				})
-				console.log("State: ", that.state)
 			})
 			.catch(function(error) {
 				console.log("Error: ", error)
@@ -47,7 +45,6 @@ export default class SongDisplayWindow extends React.Component {
 				that.setState({
 					songs: response.data.songs
 				})
-				console.log("State: ", that.state)
 			})
 			.catch(function(error) {
 				console.log("Error: ", error)
@@ -72,7 +69,6 @@ export default class SongDisplayWindow extends React.Component {
 			data: data
 		})
 			.then(function(response) {
-				console.log("Response: ", response)
 				that.updateSongList()
 			})
 			.catch(function(error) {

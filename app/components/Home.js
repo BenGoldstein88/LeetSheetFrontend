@@ -29,14 +29,14 @@ export default class Home extends React.Component {
 			currentView: 'songChart' + song.id
 		})
 
-		console.log("Song: ", song)
-		console.log("State: ", this.state)
+		// console.log("Song: ", song)
+		// console.log("State: ", this.state)
 	}
 
 	render() {
 		var thingToDisplay = null;
 		var songChartRE = new RegExp("(songChart)\\d+")
-		console.log(songChartRE.test(this.state.currentView))
+		
 		if(songChartRE.test(this.state.currentView)) {
 			thingToDisplay = <SongChart song={this.state.currentSong} onHomeButtonClick={this.handleHomeButtonClick} />
 		} else {
