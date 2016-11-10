@@ -14,19 +14,27 @@ export default class Home extends React.Component {
 
 		this.handleSongIconClick = this.handleSongIconClick.bind(this)
 		this.handleHomeButtonClick = this.handleHomeButtonClick.bind(this)
+		this.resetState = this.resetState.bind(this)
 	}
 
+	resetState() {
+		this.setState({
+			currentView: 'home',
+			currentSong: null			
+		})
+
+	}
 	handleHomeButtonClick(e) {
 		e.preventDefault();
-		this.setState({
-			currentView: 'home'
-		})
+		this.resetState();
 	}
+
 
 	handleSongIconClick(song) {
 		this.setState({
 			currentSong: song,
-			currentView: 'songChart' + song.id
+			currentView: 'songChart'
+			 // + song.id
 		})
 
 		// console.log("Song: ", song)
@@ -35,19 +43,23 @@ export default class Home extends React.Component {
 
 	render() {
 		var thingToDisplay = null;
-		var songChartRE = new RegExp("(songChart)\\d+")
+		// var songChartRE = new RegExp("(songChart)\\d+")
 		
-		if(songChartRE.test(this.state.currentView)) {
-			thingToDisplay = <SongChart song={this.state.currentSong} onHomeButtonClick={this.handleHomeButtonClick} />
-		} else {
+		// if(songChartRE.test(this.state.currentView)) {
+		// 	thingToDisplay = <SongChart song={this.state.currentSong} onHomeButtonClick={this.handleHomeButtonClick} />
+		// } else {
 			switch (this.state.currentView) {
 				case 'home':
 					thingToDisplay = <SongDisplayWindow onSongIconClick={this.handleSongIconClick} />
 					break;
+				case 'songChart':
+					thingToDisplay = <SongChart song={this.state.currentSong} onHomeButtonClick={this.handleHomeButtonClick} />
+					break;
 				default:
 					thingToDisplay = "This doesn't seem right..."
 				}
-			}
+			// }
+
 			return (
 				<div>
 

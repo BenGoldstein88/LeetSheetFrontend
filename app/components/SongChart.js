@@ -11,17 +11,19 @@ export default class SongChart extends React.Component {
       measuresMap: {}
 
     }
-    this.updateSongChart = this.updateSongChart.bind(this)
+    this.refreshSongChart = this.refreshSongChart.bind(this)
   }
 
   componentWillMount() {
-    this.updateSongChart();
+    this.refreshSongChart();
 
   }
 
 
 
-  updateSongChart() {
+  refreshSongChart() {
+    console.log("Props: ", this.props)
+    console.log("State: ", this.state)
     var url = 'http://localhost:3000/songs/'+ this.props.song.id
     var that = this
     Axios.get(url)
@@ -31,7 +33,6 @@ export default class SongChart extends React.Component {
         sections: response.data.sections,
         measuresMap: response.data.measures
       })
-      console.log("State: ", that.state)
     })
     .catch(function(error) {
       console.log("Error: ", error)
@@ -42,8 +43,7 @@ export default class SongChart extends React.Component {
     var list = []
     var index = 1
     if(this.state.sections.length > 0) {
-      console.log("Sections: ", this.state.sections)
-      console.log("MeasuresMap: ", this.state.measuresMap)
+
       for(let section of this.state.sections) {
         var currentSection = <Section measures={this.state.measuresMap[index]} section_id={section.id} key={index}/>
         list.push(currentSection)

@@ -22,10 +22,10 @@ export default class SongList extends React.Component {
     }
     return (
       <div>
-        {list}
-      	
+      {list}
+      
       </div>
-        
-    );
+      
+      );
   }
 }
