@@ -12,11 +12,31 @@ export default class SongChart extends React.Component {
 
     }
     this.refreshSongChart = this.refreshSongChart.bind(this)
+    this.handleNewSectionButtonClick = this.handleNewSectionButtonClick.bind(this)
   }
 
   componentWillMount() {
     this.refreshSongChart();
 
+  }
+
+  handleNewSectionButtonClick() {
+    var url = 'http://localhost:3000/songs/sections/'+ this.props.song.id
+    var that = this
+    Axios({
+      method: 'patch',
+      url: url
+    })
+    .then(function(response) {
+      console.log("Response: ", response)
+      that.refreshSongChart(); 
+    })
+    .catch(function(error) {
+      console.log("Error: ", error)
+
+    }) 
+
+    
   }
 
 
@@ -60,7 +80,9 @@ export default class SongChart extends React.Component {
       Sections: 
       {list}
 
-
+      <button onClick={this.handleNewSectionButtonClick} >
+      New Section
+      </button>
       <button onClick={this.props.onHomeButtonClick} >
       Home
       </button>

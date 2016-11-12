@@ -27,7 +27,8 @@ export default class Measure extends React.Component {
       <div style={{
         height: "30%",
         width: "25%",
-        border: "1px solid red"
+        border: "1px solid red",
+        display: "inline-block"
       }}>
         {list}
       </div>
