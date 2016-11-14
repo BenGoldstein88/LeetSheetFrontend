@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import Section from './Section'
+import NewMeasureFormButton from './NewMeasureFormButton'
 export default class SongChart extends React.Component {
 
   constructor(props) {
@@ -13,11 +14,23 @@ export default class SongChart extends React.Component {
     }
     this.refreshSongChart = this.refreshSongChart.bind(this)
     this.handleNewSectionButtonClick = this.handleNewSectionButtonClick.bind(this)
+    this.handleNewMeasureFormButtonClick = this.handleNewMeasureFormButtonClick.bind(this)
   }
 
   componentWillMount() {
     this.refreshSongChart();
 
+  }
+
+  handleNewMeasureFormButtonClick(sectionID) {
+    var blankMeasure = ['', '', '', '']
+    console.log("State of SongChart: ", this.state)
+    this.state.measuresMap[sectionID].push(blankMeasure)
+
+    console.log("State after new measure button click: ", this.state)
+    this.setState({
+      measuresMap: this.state.measuresMap
+    })
   }
 
   handleNewSectionButtonClick() {
@@ -69,6 +82,7 @@ export default class SongChart extends React.Component {
         var currentSection = <Section measures={this.state.measuresMap[section.id]} section_id={section.id} key={index}/>
         list.push(currentSection)
         index += 1
+      list.push(<NewMeasureFormButton sectionID={section.id} onButtonClick={this.handleNewMeasureFormButtonClick}/>)
 
       }
 

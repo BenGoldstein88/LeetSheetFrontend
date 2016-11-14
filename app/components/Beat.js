@@ -10,9 +10,13 @@ export default class Beat extends React.Component {
   render() {
     return (
       <div style={{
-      	width: "25%",
-      	height: "100%",
-      	display: "inline-block"
+      	width: "24%",
+      	height: "99%",
+      	display: "inline-block",
+        border: "1px dotted orange",
+        verticalAlign: "top",
+        textAlign: "center"
+
       }}>
       	{this.props.chord}
       </div>

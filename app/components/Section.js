@@ -16,7 +16,9 @@ export default class Section extends React.Component {
 			for(let measure of this.props.measures) {
 				var currentMeasure = <Measure measure={measure} key={index} section_id={this.props.section_id}/>
 				list.push(currentMeasure)
+				index++
 			}
+
 		}
 		return (
 			<div style={{
