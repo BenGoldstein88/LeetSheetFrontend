@@ -28,7 +28,7 @@ export default class SongChart extends React.Component {
       url: url
     })
     .then(function(response) {
-      console.log("Response: ", response)
+      console.log("Response from New Section Creation: ", response)
       that.refreshSongChart(); 
     })
     .catch(function(error) {
@@ -48,11 +48,12 @@ export default class SongChart extends React.Component {
     var that = this
     Axios.get(url)
     .then(function(response) {
-      console.log("Response: ", response)
+      console.log("Response from Refresh Song Chart: ", response)
       that.setState({
         sections: response.data.sections,
         measuresMap: response.data.measures
       })
+      console.log("New State after Refresh Song Chart: ", that.state)
     })
     .catch(function(error) {
       console.log("Error: ", error)
@@ -65,7 +66,7 @@ export default class SongChart extends React.Component {
     if(this.state.sections.length > 0) {
 
       for(let section of this.state.sections) {
-        var currentSection = <Section measures={this.state.measuresMap[index]} section_id={section.id} key={index}/>
+        var currentSection = <Section measures={this.state.measuresMap[section.id]} section_id={section.id} key={index}/>
         list.push(currentSection)
         index += 1
 
