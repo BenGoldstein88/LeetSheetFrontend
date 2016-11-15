@@ -10,10 +10,10 @@ export default class Measure extends React.Component {
   }
 
   render() {
-    console.log("Chords: ", this.props.measure.chords)
+    console.log("Chords: ", this.props.chords)
     var index = 0
     var list = []
-    for(let chord of this.props.measure.chords) {
+    for(let chord of this.props.chords) {
       if(chord !== null) {
         var currentBeat = <Beat chord={chord} key={index} />
       } else {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import Section from './Section'
+import Measure from './Measure'
 import NewMeasureFormButton from './NewMeasureFormButton'
 export default class SongChart extends React.Component {
 
@@ -23,14 +24,26 @@ export default class SongChart extends React.Component {
   }
 
   handleNewMeasureFormButtonClick(sectionID) {
-    var blankMeasure = ['', '', '', '']
-    console.log("State of SongChart: ", this.state)
-    this.state.measuresMap[sectionID].push(blankMeasure)
+    var currentMeasuresMap = this.state.measuresMap
+    var currentMeasuresArray = currentMeasuresMap[sectionID]
 
-    console.log("State after new measure button click: ", this.state)
+    var blankMeasure = <Measure section_id={sectionID} chords={['', '', '', '']} key={'newBlankMeasure'}  />
+    console.log("TEST blankMeasure", blankMeasure)
+    console.log("State of SongChart: ", this.state)
+
+    currentMeasuresArray.push(blankMeasure)
+
+    console.log("CurrentMeasuresArray TEST: ", currentMeasuresArray)
+
+
+
+    currentMeasuresMap[sectionID] = currentMeasuresArray
+
+
     this.setState({
-      measuresMap: this.state.measuresMap
+      measuresMap: currentMeasuresMap
     })
+    console.log("State after new measure button click: ", this.state)
   }
 
   handleNewSectionButtonClick() {
@@ -75,14 +88,13 @@ export default class SongChart extends React.Component {
 
   render() {
     var list = []
-    var index = 1
+    var index = 0
     if(this.state.sections.length > 0) {
 
       for(let section of this.state.sections) {
-        var currentSection = <Section measures={this.state.measuresMap[section.id]} section_id={section.id} key={index}/>
+        var currentSection = <Section measures={this.state.measuresMap[section.id]} sectionID={section.id} key={index} onNewMeasureFormButtonClick={this.handleNewMeasureFormButtonClick}/>
         list.push(currentSection)
         index += 1
-      list.push(<NewMeasureFormButton sectionID={section.id} onButtonClick={this.handleNewMeasureFormButtonClick}/>)
 
       }
 
